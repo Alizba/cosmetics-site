@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
-import image from '../assets/heroImage.webp';
+import image from '../assets/images/heroImage.webp'
 
 export default function EnhancedAloeVeraHero() {
   return (
