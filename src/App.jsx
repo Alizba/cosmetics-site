@@ -3,6 +3,7 @@ import './App.css'
 import Navbar from './Components/Navbar'
 import HeroSection from './Components/HeroSection'
 import CategorySection from './Components/CategorySection'
+import PromotionalBanner from './Components/PromotionalBanner'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Navbar />
       <HeroSection/>
       <CategorySection />
+      <PromotionalBanner/>
     </div>
   )
 }
