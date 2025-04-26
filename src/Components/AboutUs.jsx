@@ -12,7 +12,7 @@ export default function AboutUs() {
                     <p className="text-lg text-gray-700 max-w-2xl mx-auto">
                         Crafted with love and science for your skin's radiance
                     </p>
-                </div> 
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div className="relative">
                         <div className="bg-red-100 rounded-lg w-full h-96 overflow-hidden">
@@ -57,7 +57,6 @@ export default function AboutUs() {
                                     <p className="text-gray-700">Our products are never tested on animals and always ethically produced.</p>
                                 </div>
                             </div>
-
                             <div className="flex items-start">
                                 <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#B23A48' }}>
                                     <span className="text-white font-bold">3</span>
@@ -68,7 +67,6 @@ export default function AboutUs() {
                                 </div>
                             </div>
                         </div>
-
                         <button
                             className="flex items-center px-6 py-3 text-white font-medium rounded-lg transition-colors duration-300"
                             style={{ backgroundColor: '#B23A48' }}
@@ -80,12 +78,10 @@ export default function AboutUs() {
                         </button>
                     </div>
                 </div>
-
-       
                 <div className="mt-20">
                     <h3 className="text-2xl font-bold mb-10 text-center text-gray-900">Our Core Values</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                     
+
                         <div className="rounded-lg p-6" style={{ backgroundColor: '#F5F5F5' }}>
                             <div className="w-16 h-16 mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: '#FCB9B2' }}>
                                 <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -97,8 +93,6 @@ export default function AboutUs() {
                                 We're dedicated to pushing boundaries with innovative formulas that deliver real results.
                             </p>
                         </div>
-
-                     
                         <div className="rounded-lg p-6" style={{ backgroundColor: '#F5F5F5' }}>
                             <div className="w-16 h-16 mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: '#FCB9B2' }}>
                                 <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -110,8 +104,6 @@ export default function AboutUs() {
                                 Every decision we make considers our impact on the planet and future generations.
                             </p>
                         </div>
-
-                      
                         <div className="rounded-lg p-6" style={{ backgroundColor: '#F5F5F5' }}>
                             <div className="w-16 h-16 mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: '#FCB9B2' }}>
                                 <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -125,8 +117,6 @@ export default function AboutUs() {
                         </div>
                     </div>
                 </div>
-
-               
             </div>
         </section>
     );

@@ -6,6 +6,7 @@ import CategorySection from './Components/CategorySection'
 import PromotionalBanner from './Components/PromotionalBanner'
 import FeaturedProducts from './Components/FeaturedProducts'
 import AboutUs from './Components/AboutUs'
+import Footer from './Components/Footer'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <PromotionalBanner/>
       <AboutUs/>
       <FeaturedProducts/>
+      <Footer/>
           </div>
   )
 }

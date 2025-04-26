@@ -1,4 +1,12 @@
 import { useState } from 'react';
+import serum1 from '../assets/images/serum1.png';
+import serum2 from '../assets/images/serum3.png';
+import makeUp1 from '../assets/images/makeUp1.png';
+import makeUp2 from '../assets/images/makeUp2.png';
+import makeUp3 from '../assets/images/makeUp3.png';
+import makeUp4 from '../assets/images/makeUp4.png';
+import cream1 from '../assets/images/cream1.png';
+import faceCream from '../assets/images/faceCream1.png';
 
 export default function FeaturedProducts() {
     const [activeCategory, setActiveCategory] = useState('For Sale');
@@ -8,61 +16,60 @@ export default function FeaturedProducts() {
     const products = [
         {
             id: 1,
-            name: 'Organic High Customer Turnover Powder',
-            price: 29.9,
-            image: '/api/placeholder/160/160'
+            name: 'Hair Oil',
+            price: 299,
+            image: serum1
         },
         {
             id: 2,
-            name: 'Organic High Customer Turnover Powder',
-            price: 33.9,
-            image: '/api/placeholder/160/160'
+            name: 'Compact Powder',
+            price: 339,
+            image: makeUp1
         },
         {
             id: 3,
-            name: 'Organic High Customer Turnover Powder',
-            price: 39.9,
-            image: '/api/placeholder/160/160'
+            name: 'Eye Shades',
+            price: 399,
+            image: makeUp2
         },
         {
             id: 4,
-            name: 'Organic High Customer Turnover Powder',
-            price: 39.9,
-            image: '/api/placeholder/160/160'
+            name: 'Loose cosmetic Powder',
+            price: 399,
+            image: makeUp3
         },
         {
             id: 5,
-            name: 'Organic High Customer Turnover Powder',
-            price: 22.9,
-            image: '/api/placeholder/160/160'
+            name: 'Lip Sticks',
+            price: 229,
+            image: makeUp4
         },
         {
             id: 6,
-            name: 'Organic High Customer Turnover Powder',
-            price: 22.9,
-            image: '/api/placeholder/160/160'
+            name: 'Whitening Cream',
+            price: 229,
+            image: cream1
         },
         {
             id: 7,
-            name: 'Organic High Customer Turnover Powder',
-            price: 28.9,
-            image: '/api/placeholder/160/160'
+            name: 'Hand Cream',
+            price: 289,
+            image: faceCream
         },
         {
             id: 8,
-            name: 'Organic High Customer Turnover Powder',
-            price: 29.9,
-            image: '/api/placeholder/160/160'
+            name: 'Acne Serum',
+            price: 299,
+            image: serum2
         }
     ];
 
-    // Custom color classes
     const colors = {
-        primary: 'bg-[#B23A48]', // B23A48 - deeper red
-        primaryHover: 'hover:bg-[#8C2F39]', // 8C2F39 - burgundy
-        secondary: 'bg-[#FED0BB]', // FED0BB - light peach
-        secondaryLight: 'bg-[#FCB9B2]', // FCB9B2 - salmon pink
-        dark: 'text-[#461220]', // 461220 - dark burgundy
+        primary: 'bg-[#B23A48]', 
+        primaryHover: 'hover:bg-[#8C2F39]', 
+        secondary: 'bg-[#FED0BB]', 
+        secondaryLight: 'bg-[#FCB9B2]', 
+        dark: 'text-[#461220]',
     };
 
     return (
@@ -70,7 +77,6 @@ export default function FeaturedProducts() {
             <div className="flex flex-col items-center mb-8">
                 <h2 className="text-4xl mb-10 font-serif font-bold" style={{ color: '#461220' }}>Featured Products</h2>
 
-                {/* Category tabs */}
                 <div className="flex space-x-1 p-1 rounded-lg" style={{ backgroundColor: '#FED0BB' }}>
                     {categories.map((category) => (
                         <button
@@ -89,15 +95,14 @@ export default function FeaturedProducts() {
                 </div>
             </div>
 
-            {/* Product grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
                 {products.map((product) => (
                     <div key={product.id} className="group">
                         <div className="rounded-lg overflow-hidden mb-3" style={{ backgroundColor: '#F3e2d5' }}>
                             <img
                                 src={product.image}
                                 alt={product.name}
-                                className="w-full h-48 object-cover transition-transform group-hover:scale-105"
+                                className="w-full h-48 object-contain transition-transform group-hover:scale-105"
                             />
                         </div>
                         <div className="text-center">
@@ -105,7 +110,7 @@ export default function FeaturedProducts() {
                             <div className="flex justify-center">
                                 <div className="px-4 py-1 mb-5 rounded-full" style={{ backgroundColor: '#FED0BB' }}>
                                     <p className="text-lg font-bold" style={{ color: '#461220' }}>
-                                        ${product.price.toFixed(1)}
+                                        Rs {product.price.toFixed(1)}
                                     </p>
                                 </div>
                             </div>
@@ -126,7 +131,7 @@ export default function FeaturedProducts() {
 
                         }}
                     >
-                        Shop More
+                        Load More
                     </button>
                 </div>
         </div>
