@@ -4,6 +4,8 @@ import Navbar from './Components/Navbar'
 import HeroSection from './Components/HeroSection'
 import CategorySection from './Components/CategorySection'
 import PromotionalBanner from './Components/PromotionalBanner'
+import FeaturedProducts from './Components/FeaturedProducts'
+import AboutUs from './Components/AboutUs'
 
 function App() {
   return (
@@ -12,7 +14,9 @@ function App() {
       <HeroSection/>
       <CategorySection />
       <PromotionalBanner/>
-    </div>
+      <AboutUs/>
+      <FeaturedProducts/>
+          </div>
   )
 }
 
