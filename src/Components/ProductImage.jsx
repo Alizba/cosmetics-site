@@ -11,7 +11,7 @@ export default function ProductPage() {
     { id: 'brown', name: 'Brown', class: 'bg-amber-800' },
   ];
 
-  const incrementQuantity = () => {
+  const incrementQuantit = () => {
     setQuantity(prev => prev + 1);
   };
 
