@@ -7,6 +7,8 @@ import PromotionalBanner from './Components/PromotionalBanner'
 import FeaturedProducts from './Components/FeaturedProducts'
 import AboutUs from './Components/AboutUs'
 import Footer from './Components/Footer'
+import SignIn from './Components/SignIn'
+import SignUp from './Components/SignUp'
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
       <AboutUs/>
       <FeaturedProducts/>
       <Footer/>
+      <SignIn/>
+      <SignUp/>
           </div>
   )
 }
