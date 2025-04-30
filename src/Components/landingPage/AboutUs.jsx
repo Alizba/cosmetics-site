@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, Star } from 'lucide-react';
-import image from '../assets/images/aboutUs.jpeg';
+import  image  from '../../assets/images/aboutUs.jpeg';
 
 export default function AboutUs() {
     return (

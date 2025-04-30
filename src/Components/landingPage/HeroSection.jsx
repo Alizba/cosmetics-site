@@ -1,8 +1,8 @@
 import React from 'react';
 import { ChevronRight, Leaf, Sparkles, Droplet } from 'lucide-react';
 
-import heroImage from '../assets/images/heroImage.webp';
-import heroImg3 from '../assets/images/heroImg3.png';
+import heroImage from '../../assets/images/heroImage.webp';
+import heroImg3 from '../../assets/images/heroImg3.png';
 
 export default function HeroSection() {
   return (

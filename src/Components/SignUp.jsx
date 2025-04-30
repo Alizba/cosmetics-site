@@ -1,363 +1,203 @@
-import { useState } from "react";
-import { ChevronLeft } from "lucide-react";
+import { useState } from 'react';
+import { Mail, Lock, User, Calendar, ChevronRight, Sparkles, Heart, Gift } from 'lucide-react';
+import image from '../assets/images/signlady.webp'
 
-const RegisterPage = () => {
-  const [formStep, setFormStep] = useState(1);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    birthdate: "",
-    skinType: "",
-    interests: [],
-    newsletter: true
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    
-    if (type === "checkbox") {
-      if (name === "newsletter") {
-        setFormData({ ...formData, [name]: checked });
-      } else {
-       
-        
-        const updatedInterests = [...formData.interests];
-        if (checked) {
-          updatedInterests.push(value);
-        } else {
-          const index = updatedInterests.indexOf(value);
-          if (index > -1) {
-            updatedInterests.splice(index, 1);
-          }
-        }
-        setFormData({ ...formData, interests: updatedInterests });
-      }
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
-  };
-
-  const nextStep = () => {
-    setFormStep(formStep + 1);
-  };
-
-  const prevStep = () => {
-    setFormStep(formStep - 1);
-  };
-
+export default function SignUpComponent() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [birthdate, setBirthdate] = useState('');
+  const [agreeTerms, setAgreeTerms] = useState(false);
+  const [newsletter, setNewsletter] = useState(false);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitting registration:", formData);
+    console.log('Sign up attempt with:', { email, password, confirmPassword, fullName, birthdate, agreeTerms, newsletter });
   };
 
-  const skinTypeOptions = ["Normal", "Dry", "Oily", "Combination", "Sensitive"];
-  
-  const interestOptions = [
-    "Skincare", 
-    "Makeup", 
-    "Fragrance", 
-    "Hair Care", 
-    "Body Care",
-    "Clean Beauty",
-    "Anti-Aging",
-    "Korean Beauty"
-  ];
-
   return (
-    <div className="min-h-screen bg-rose-50 flex flex-col md:flex-row">
+    <div className="flex h-screen w-full">
+      <div className="hidden md:flex md:w-2/5 relative overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src={image} 
+            alt="Beauty Products" 
+            className="object-cover w-full h-full"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#B23A48] via-[#FCB9B2] to-[#461220] opacity-50 z-10"></div>
+        
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-white p-10 z-20">
+          <div className="text-3xl font-bold mb-4">JOIN OUR BEAUTY CLUB</div>
+          <div className="text-xl mb-6">CREATE YOUR ACCOUNT</div>
+          <div className="w-16 h-16 flex items-center justify-center">
+            <Gift className="text-[#FED0BB]" size={36} />
+          </div>
+          <div className="mt-8 text-center text-[#FED0BB] max-w-xs">
+            Sign up today to receive exclusive offers, beauty tips, and early access to new products.
+          </div>
+          <div className="mt-6 flex items-center">
+            <Sparkles className="text-[#FED0BB] mr-2" size={16} />
+            <span className="text-[#FED0BB]">Get 15% off your first order</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full md:w-3/5 flex flex-col justify-center items-center p-6 bg-white overflow-y-auto">
+        <div className="w-full max-w-md">
      
-      <div className="w-full md:w-3/5 p-8 flex items-center justify-center">
-        <div className="w-full max-w-lg">
-          <div className="mb-8">
-            <h1 className="text-3xl font-serif text-stone-800 mb-2">Create Your Beauty Profile</h1>
-            <p className="text-stone-600">Join our community to receive personalized recommendations and exclusive offers</p>
-          </div>
-
-          <div className="mb-8">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium text-stone-700">
-                Step {formStep} of 3
-              </span>
-              <span className="text-sm text-stone-500">
-                {formStep === 1 ? "Account Info" : formStep === 2 ? "Personal Details" : "Beauty Profile"}
-              </span>
-            </div>
-            <div className="w-full bg-stone-200 rounded-full h-2">
-              <div 
-                className="bg-rose-400 h-2 rounded-full transition-all duration-300" 
-                style={{ width: `${(formStep / 3) * 100}%` }}
-              ></div>
-            </div>
-          </div>
-
-          {formStep === 1 && (
-            <div className="space-y-6">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-1">
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-md border border-stone-300 focus:outline-none focus:ring-2 focus:ring-rose-200 focus:border-rose-300 transition"
-                    placeholder="Jane"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-1">
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-md border border-stone-300 focus:outline-none focus:ring-2 focus:ring-rose-200 focus:border-rose-300 transition"
-                    placeholder="Doe"
-                    required
-                  />
-                </div>
+          <div className="flex flex-col items-center mb-8">
+            <div className="mb-2 relative">
+              <div className="absolute -top-2 -right-2">
+                <Heart className="text-[#B23A48]" size={16} fill="#B23A48" />
               </div>
-
-              <div>
-                <label className="block text-sm font-medium text-stone-700 mb-1">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-md border border-stone-300 focus:outline-none focus:ring-2 focus:ring-rose-200 focus:border-rose-300 transition"
-                  placeholder="your@email.com"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-stone-700 mb-1">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-md border border-stone-300 focus:outline-none focus:ring-2 focus:ring-rose-200 focus:border-rose-300 transition"
-                  placeholder="••••••••"
-                  required
-                />
-                <p className="mt-1 text-xs text-stone-500">
-                  Must be at least 8 characters with a number and special character
-                </p>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-stone-700 mb-1">
-                  Confirm Password
-                </label>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-md border border-stone-300 focus:outline-none focus:ring-2 focus:ring-rose-200 focus:border-rose-300 transition"
-                  placeholder="••••••••"
-                  required
-                />
-              </div>
-
-              <button
-                onClick={nextStep}
-                className="w-full bg-rose-400 text-white py-3 rounded-md hover:bg-rose-500 transition font-medium"
+              <svg 
+                viewBox="0 0 100 100" 
+                className="w-16 h-16 text-[#B23A48]"
+                fill="currentColor"
               >
-                Continue
+                <path d="M50,20 A30,30 0 1,0 50,80 A30,30 0 1,0 50,20 Z M50,35 A15,15 0 1,1 50,65 A15,15 0 1,1 50,35 Z" />
+              </svg>
+            </div>
+            <h1 className="text-3xl font-bold text-[#461220]">CREATE ACCOUNT</h1>
+            <p className="text-sm text-[#B23A48] mt-1">Your personalized beauty experience awaits</p>
+          </div>
+
+          <div className="space-y-4">
+            <div className="relative">
+              <User className="absolute left-2 top-3 text-[#B23A48]" size={20} />
+              <input
+                type="text"
+                placeholder="Full Name"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                className="w-full py-3 pl-10 pr-4 border-b border-[#FCB9B2] focus:border-[#B23A48] focus:outline-none bg-transparent text-[#461220]"
+              />
+            </div>
+
+            <div className="relative">
+              <Mail className="absolute left-2 top-3 text-[#B23A48]" size={20} />
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full py-3 pl-10 pr-4 border-b border-[#FCB9B2] focus:border-[#B23A48] focus:outline-none bg-transparent text-[#461220]"
+              />
+            </div>
+
+            <div className="relative">
+              <Calendar className="absolute left-2 top-3 text-[#B23A48]" size={20} />
+              <input
+                type="date"
+                placeholder="Date of Birth"
+                value={birthdate}
+                onChange={(e) => setBirthdate(e.target.value)}
+                className="w-full py-3 pl-10 pr-4 border-b border-[#FCB9B2] focus:border-[#B23A48] focus:outline-none bg-transparent text-[#461220]"
+              />
+              <p className="text-xs text-[#B23A48] mt-1">For birthday rewards and age-appropriate recommendations</p>
+            </div>
+
+            <div className="relative">
+              <Lock className="absolute left-2 top-3 text-[#B23A48]" size={20} />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full py-3 pl-10 pr-4 border-b border-[#FCB9B2] focus:border-[#B23A48] focus:outline-none bg-transparent text-[#461220]"
+              />
+            </div>
+
+            <div className="relative">
+              <Lock className="absolute left-2 top-3 text-[#B23A48]" size={20} />
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="w-full py-3 pl-10 pr-4 border-b border-[#FCB9B2] focus:border-[#B23A48] focus:outline-none bg-transparent text-[#461220]"
+              />
+            </div>
+
+            <div className="flex items-start mt-6">
+              <div className="flex items-center h-5">
+                <input
+                  id="terms"
+                  type="checkbox"
+                  checked={agreeTerms}
+                  onChange={(e) => setAgreeTerms(e.target.checked)}
+                  className="w-4 h-4 accent-[#B23A48] focus:ring-[#B23A48]"
+                />
+              </div>
+              <div className="ml-3 text-sm">
+                <label htmlFor="terms" className="text-[#461220]">
+                  I agree to the <a href="#" className="text-[#B23A48] hover:text-[#8C2F39]">Terms of Service</a> and <a href="#" className="text-[#B23A48] hover:text-[#8C2F39]">Privacy Policy</a>
+                </label>
+              </div>
+            </div>
+
+            <div className="flex items-start">
+              <div className="flex items-center h-5">
+                <input
+                  id="newsletter"
+                  type="checkbox"
+                  checked={newsletter}
+                  onChange={(e) => setNewsletter(e.target.checked)}
+                  className="w-4 h-4 accent-[#B23A48] focus:ring-[#B23A48]"
+                />
+              </div>
+              <div className="ml-3 text-sm">
+                <label htmlFor="newsletter" className="text-[#461220]">
+                  Subscribe to our newsletter for exclusive offers and beauty tips
+                </label>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <button
+                onClick={handleSubmit}
+                className="w-full py-3 bg-[#B23A48] text-white rounded-full hover:bg-[#8C2F39] transition-colors"
+              >
+                CREATE ACCOUNT
               </button>
             </div>
-          )}
+          </div>
 
-          {formStep === 2 && (
-            <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-stone-700 mb-1">
-                  Date of Birth
-                </label>
-                <input
-                  type="date"
-                  name="birthdate"
-                  value={formData.birthdate}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-md border border-stone-300 focus:outline-none focus:ring-2 focus:ring-rose-200 focus:border-rose-300 transition"
-                  required
-                />
-                <p className="mt-1 text-xs text-stone-500">
-                  We'll send you a special birthday offer!
-                </p>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-stone-700 mb-1">
-                  Skin Type
-                </label>
-                <select
-                  name="skinType"
-                  value={formData.skinType}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-md border border-stone-300 focus:outline-none focus:ring-2 focus:ring-rose-200 focus:border-rose-300 transition"
-                  required
-                >
-                  <option value="" disabled>Select your skin type</option>
-                  {skinTypeOptions.map(type => (
-                    <option key={type} value={type.toLowerCase()}>{type}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  id="newsletter"
-                  name="newsletter"
-                  checked={formData.newsletter}
-                  onChange={handleInputChange}
-                  className="h-4 w-4 text-rose-400 focus:ring-rose-300 border-stone-300 rounded"
-                />
-                <label htmlFor="newsletter" className="ml-2 block text-sm text-stone-700">
-                  Sign me up for the newsletter to receive beauty tips, product updates, and exclusive offers
-                </label>
-              </div>
-
-              <div className="flex space-x-4">
-                <button
-                  onClick={prevStep}
-                  className="flex items-center justify-center w-12 h-12 rounded-full border border-stone-300 hover:bg-stone-100 transition"
-                >
-                  <ChevronLeft size={20} className="text-stone-700" />
-                </button>
-                
-                <button
-                  onClick={nextStep}
-                  className="flex-1 bg-rose-400 text-white py-3 rounded-md hover:bg-rose-500 transition font-medium"
-                >
-                  Continue
-                </button>
-              </div>
+          <div className="mt-8">
+            <div className="text-center mb-4 text-[#461220]">Or Sign Up with</div>
+            <div className="flex justify-center space-x-4">
+              <button className="flex items-center space-x-2 px-4 py-2 border border-[#FED0BB] rounded-md hover:bg-[#FED0BB] hover:bg-opacity-10 w-1/2 justify-center">
+                <svg className="w-5 h-5" viewBox="0 0 24 24">
+                  <path
+                    fill="#4285F4"
+                    d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81z"
+                  />
+                </svg>
+                <span className="text-[#461220]">Google</span>
+              </button>
+              <button className="flex items-center space-x-2 px-4 py-2 border border-[#FED0BB] rounded-md hover:bg-[#FED0BB] hover:bg-opacity-10 w-1/2 justify-center">
+                <svg className="w-5 h-5" viewBox="0 0 24 24">
+                  <path
+                    fill="#1877F2"
+                    d="M20.007 3H3.993C3.445 3 3 3.445 3 3.993v16.014c0 .548.445.993.993.993h8.621v-6.972h-2.346v-2.717h2.346V9.31c0-2.325 1.42-3.591 3.494-3.591.993 0 1.847.074 2.096.107v2.43h-1.438c-1.128 0-1.346.536-1.346 1.323v1.734h2.69l-.35 2.717h-2.34V21h4.587c.548 0 .993-.445.993-.993V3.993c0-.548-.445-.993-.993-.993z"
+                  />
+                </svg>
+                <span className="text-[#461220]">Facebook</span>
+              </button>
             </div>
-          )}
-
-          {formStep === 3 && (
-            <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-stone-700 mb-3">
-                  Beauty Interests (Select all that apply)
-                </label>
-                <div className="grid grid-cols-2 gap-3">
-                  {interestOptions.map(interest => (
-                    <div key={interest} className="flex items-center">
-                      <input
-                        type="checkbox"
-                        id={interest.toLowerCase().replace(' ', '-')}
-                        name="interests"
-                        value={interest.toLowerCase()}
-                        checked={formData.interests.includes(interest.toLowerCase())}
-                        onChange={handleInputChange}
-                        className="h-4 w-4 text-rose-400 focus:ring-rose-300 border-stone-300 rounded"
-                      />
-                      <label 
-                        htmlFor={interest.toLowerCase().replace(' ', '-')} 
-                        className="ml-2 block text-sm text-stone-700"
-                      >
-                        {interest}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="bg-rose-100 p-4 rounded-md">
-                <p className="text-xs text-stone-700">
-                  By creating an account, you agree to our <a href="#" className="text-rose-600 hover:underline">Terms of Service</a> and acknowledge our <a href="#" className="text-rose-600 hover:underline">Privacy Policy</a>.
-                </p>
-              </div>
-
-              <div className="flex space-x-4">
-                <button
-                  onClick={prevStep}
-                  className="flex items-center justify-center w-12 h-12 rounded-full border border-stone-300 hover:bg-stone-100 transition"
-                >
-                  <ChevronLeft size={20} className="text-stone-700" />
-                </button>
-                
-                <button
-                  onClick={handleSubmit}
-                  className="flex-1 bg-rose-400 text-white py-3 rounded-md hover:bg-rose-500 transition font-medium"
-                >
-                  Create Account
-                </button>
-              </div>
-            </div>
-          )}
-
-          <div className="mt-8 text-center">
-            <p className="text-sm text-stone-600">
-              Already have an account?
-              <a href="#" className="ml-1 text-rose-600 hover:text-rose-800 transition font-medium">
-                Sign In
+          </div>
+          <div className="mt-8 text-center pb-8">
+            <p className="text-[#461220]">
+              Already have an account?{" "}
+              <a href="#" className="text-[#B23A48] hover:text-[#8C2F39] font-semibold">
+                Login
               </a>
             </p>
           </div>
         </div>
       </div>
-
-      <div className="hidden md:block md:w-2/5 bg-rose-100">
-        <div className="h-full relative overflow-hidden">
-          <img
-            src="/api/placeholder/800/1200"
-            alt="Beauty products flat lay with flowers"
-            className="h-full w-full object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-gradient-to-l from-rose-100 to-transparent opacity-40"></div>
-          <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-12">
-            <div className="bg-white bg-opacity-80 p-8 rounded-lg max-w-sm">
-              <h2 className="text-3xl font-serif mb-4 text-stone-800">
-                Join Our Beauty Community
-              </h2>
-              <p className="text-stone-700 mb-4">
-                Get personalized recommendations, early access to new products, and exclusive offers.
-              </p>
-              <div className="flex justify-center space-x-4 mt-6">
-                <div className="text-center">
-                  <div className="w-16 h-16 rounded-full bg-rose-200 flex items-center justify-center mx-auto mb-2">
-                    <span className="text-rose-600 text-xl font-bold">20%</span>
-                  </div>
-                  <p className="text-xs text-stone-700">First Order Discount</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 rounded-full bg-rose-200 flex items-center justify-center mx-auto mb-2">
-                    <span className="text-rose-600 text-xl font-bold">Free</span>
-                  </div>
-                  <p className="text-xs text-stone-700">Shipping on $50+</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 rounded-full bg-rose-200 flex items-center justify-center mx-auto mb-2">
-                    <span className="text-rose-600 text-xl font-bold">VIP</span>
-                  </div>
-                  <p className="text-xs text-stone-700">Early Access</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
-};
-
-export default RegisterPage;
+}

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import perfumeImage1 from '../assets/images/perfume1.png';
-import perfumeImage2 from '../assets/images/perfume2.png';
-import perfumeImage3 from '../assets/images/perfume3.png';
-import skinCareSet from '../assets/images/skincare-set.png';
+import perfumeImage1 from '../../assets/images/perfume1.png';
+import perfumeImage2 from '../../assets/images/perfume2.png';
+import perfumeImage3 from '../../assets/images/perfume3.png';
+import skinCareSet from '../../assets/images/skincare-set.png';
 
 export default function PromotionalBanner() {
   return (

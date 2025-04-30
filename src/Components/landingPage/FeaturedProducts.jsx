@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import serum1 from '../assets/images/serum1.png';
-import serum2 from '../assets/images/serum3.png';
-import makeUp1 from '../assets/images/makeUp1.png';
-import makeUp2 from '../assets/images/makeUp2.png';
-import makeUp3 from '../assets/images/makeUp3.png';
-import makeUp4 from '../assets/images/makeUp4.png';
-import cream1 from '../assets/images/cream1.png';
-import faceCream from '../assets/images/faceCream1.png';
+import serum1 from '../../assets/images/serum1.png';
+import serum2 from '../../assets/images/serum3.png';
+import makeUp1 from '../../assets/images/makeUp1.png';
+import makeUp2 from '../../assets/images/makeUp2.png';
+import makeUp3 from '../../assets/images/makeUp3.png';
+import makeUp4 from '../../assets/images/makeUp4.png';
+import cream1 from '../../assets/images/cream1.png';
+import faceCream from '../../assets/images/faceCream1.png';
 
 export default function FeaturedProducts() {
     const [activeCategory, setActiveCategory] = useState('For Sale');
