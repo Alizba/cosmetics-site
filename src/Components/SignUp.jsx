@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Mail, Lock, User, Calendar, ChevronRight, Sparkles, Heart, Gift } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import image from '../assets/images/signlady.webp'
 
-export default function SignUpComponent() {
+// Changed function name to match the export in App.jsx
+function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -10,10 +12,12 @@ export default function SignUpComponent() {
   const [birthdate, setBirthdate] = useState('');
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [newsletter, setNewsletter] = useState(false);
+  const navigate = useNavigate();
   
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Sign up attempt with:', { email, password, confirmPassword, fullName, birthdate, agreeTerms, newsletter });
+    // Add registration logic here
   };
 
   return (
@@ -191,9 +195,9 @@ export default function SignUpComponent() {
           <div className="mt-8 text-center pb-8">
             <p className="text-[#461220]">
               Already have an account?{" "}
-              <a href="#" className="text-[#B23A48] hover:text-[#8C2F39] font-semibold">
+              <Link to="/signin" className="text-[#B23A48] hover:text-[#8C2F39] font-semibold">
                 Login
-              </a>
+              </Link>
             </p>
           </div>
         </div>
@@ -201,3 +205,5 @@ export default function SignUpComponent() {
     </div>
   );
 }
+
+export default SignUp;

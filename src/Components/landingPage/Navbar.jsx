@@ -1,5 +1,6 @@
-import { Heart, Search, ShoppingBag, UserPlus } from 'lucide-react';
+import { Heart, Search, ShoppingBag, UserPlus, User } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -11,15 +12,17 @@ function Navbar() {
         <div className="flex items-center">
 
           <div className="mr-6">
-            <h1 className="text-4xl font-extrabold tracking-widest italic" style={{ color: '#461220' }}>Wera</h1>
+            <Link to="/">
+              <h1 className="text-4xl font-extrabold tracking-widest italic" style={{ color: '#461220' }}>Wera</h1>
+            </Link>
           </div>
 
           <div className="h-8 w-px mx-4 hidden md:block" style={{ backgroundColor: '#8C2F39' }}></div>
 
           <div className="hidden md:flex space-x-8">
-            <a href="#" className="font-medium transition duration-200 hover:text-white" style={{ color: '#461220' }}>Home</a>
-            <a href="#" className="font-medium transition duration-200 hover:text-white" style={{ color: '#461220' }}>Products</a>
-            <a href="#" className="font-medium transition duration-200 hover:text-white" style={{ color: '#461220' }}>Contacts</a>
+            <Link to="/" className="font-medium transition duration-200 hover:text-white" style={{ color: '#461220' }}>Home</Link>
+            <Link to="/products" className="font-medium transition duration-200 hover:text-white" style={{ color: '#461220' }}>Products</Link>
+            <Link to="/contacts" className="font-medium transition duration-200 hover:text-white" style={{ color: '#461220' }}>Contacts</Link>
           </div>
         </div>
 
@@ -44,15 +47,31 @@ function Navbar() {
             />
           </div>
 
-          <button className="p-3 m-1 rounded-full shadow-md transition duration-200 hover:shadow-lg" style={{ backgroundColor: '#B23A48' }}>
-            <ShoppingBag size={20} className="text-white" />
-          </button>
-          <button className="p-3 m-1 rounded-full shadow-md transition duration-200 hover:shadow-lg" style={{ backgroundColor: '#B23A48' }}>
-            <Heart size={20} className="text-white" />
-          </button>
-          <button className="p-3 m-1 rounded-full shadow-md transition duration-200 hover:shadow-lg" style={{ backgroundColor: '#B23A48' }}>
-            <UserPlus size={20} className="text-white" />
-          </button>
+          <Link to="/cart">
+            <button className="p-3 m-1 rounded-full shadow-md transition duration-200 hover:shadow-lg" style={{ backgroundColor: '#B23A48' }}>
+              <ShoppingBag size={20} className="text-white" />
+            </button>
+          </Link>
+          
+          <Link to="/wishlist">
+            <button className="p-3 m-1 rounded-full shadow-md transition duration-200 hover:shadow-lg" style={{ backgroundColor: '#B23A48' }}>
+              <Heart size={20} className="text-white" />
+            </button>
+          </Link>
+          
+          <Link to="/signin">
+            <button className="p-3 m-1 rounded-full shadow-md transition duration-200 hover:shadow-lg" style={{ backgroundColor: '#B23A48' }}>
+              <User size={20} className="text-white" />
+              <span className="sr-only">Sign In</span>
+            </button>
+          </Link>
+          
+          <Link to="/signup">
+            <button className="p-3 m-1 rounded-full shadow-md transition duration-200 hover:shadow-lg" style={{ backgroundColor: '#B23A48' }}>
+              <UserPlus size={20} className="text-white" />
+              <span className="sr-only">Sign Up</span>
+            </button>
+          </Link>
         </div>
       </nav>
     </div>

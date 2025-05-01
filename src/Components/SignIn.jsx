@@ -1,14 +1,18 @@
 import { useState } from 'react';
 import image from '../assets/images/signlady.webp'
 import { Mail, Lock, ChevronRight, Sparkles, Heart } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 
-export default function LoginComponent() {
+// Changed function name to match the export in App.jsx
+function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
   
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Login attempt with:', { email, password });
+    // Add authentication logic here
   };
 
   return (
@@ -117,9 +121,9 @@ export default function LoginComponent() {
           <div className="mt-8 text-center">
             <p className="text-[#461220]">
               Don't have an account?{" "}
-              <a href="#" className="text-[#B23A48] hover:text-[#8C2F39] font-semibold">
+              <Link to="/signup" className="text-[#B23A48] hover:text-[#8C2F39] font-semibold">
                 Sign up
-              </a>
+              </Link>
             </p>
           </div>
         </div>
@@ -127,3 +131,5 @@ export default function LoginComponent() {
     </div>
   );
 }
+
+export default SignIn;

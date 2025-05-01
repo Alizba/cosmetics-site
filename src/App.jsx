@@ -1,28 +1,31 @@
 import React from 'react'
 import './App.css'
-import Navbar from './Components/landingPage/Navbar'
-import HeroSection from './Components/landingPage/HeroSection'
-import CategorySection from './Components/landingPage/CategorySection'
-import PromotionalBanner from './Components/landingPage/PromotionalBanner'
-import FeaturedProducts from './Components/landingPage/FeaturedProducts'
-import AboutUs from './Components/landingPage/AboutUs'
-import Footer from './Components/landingPage/Footer'
+import Landing from './Components/landingPage/Landing'
+import { Routes, Route } from 'react-router-dom'
 import SignIn from './Components/SignIn'
 import SignUp from './Components/SignUp'
+import UserPage from './Components/userPage/UserLanding'
+import AdminPage from './Components/adminPage/AdminDashboard'
+import Cart from './Components/Cart'
+import Wishlist from './Components/WishList'
+import Products from './Components/Products'
+import Contacts from './Components/Contacts'
 
 function App() {
   return (
-    <div className="w-screen max-w-full">
-      <Navbar />
-      <HeroSection/>
-      <CategorySection />
-      <PromotionalBanner/>
-      <AboutUs/>
-      <FeaturedProducts/>
-      <Footer/>
-      <SignIn/>
-      <SignUp/>
-          </div>
+    <div className='w-screen max-w-full'>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/contacts" element={<Contacts />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/user/*" element={<UserPage />} />
+        <Route path="/admin/*" element={<AdminPage />} />
+      </Routes>
+    </div>
   )
 }
 
