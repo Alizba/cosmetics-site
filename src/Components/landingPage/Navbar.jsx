@@ -47,7 +47,7 @@ function Navbar() {
             />
           </div>
 
-          <Link to="/cart">
+          {/* <Link to="/cart">
             <button className="p-3 m-1 rounded-full shadow-md transition duration-200 hover:shadow-lg" style={{ backgroundColor: '#B23A48' }}>
               <ShoppingBag size={20} className="text-white" />
             </button>
@@ -58,7 +58,7 @@ function Navbar() {
               <Heart size={20} className="text-white" />
             </button>
           </Link>
-          
+           */}
           <Link to="/signin">
             <button className="p-3 m-1 rounded-full shadow-md transition duration-200 hover:shadow-lg" style={{ backgroundColor: '#B23A48' }}>
               <User size={20} className="text-white" />

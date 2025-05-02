@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function CategorySection() {
   const features = [
@@ -7,36 +8,42 @@ export default function CategorySection() {
       title: "Hair Serums",
       alt: "Hair serum bottle",
       bgColor: "#FCB9B2",
+      slug: "hair-serums"
     },
     {
       icon: "https://images.pexels.com/photos/1472098/pexels-photo-1472098.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       title: "Makeup Brushes",
       alt: "Makeup brush",
-      bgColor: "#FED0BB"
+      bgColor: "#FED0BB",
+      slug: "makeup-brushes"
     },
     {
       icon: "https://images.pexels.com/photos/4108279/pexels-photo-4108279.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       title: "Perfumes",
       alt: "Perfume bottle",
-      bgColor: "#FCB9B2"
+      bgColor: "#FCB9B2",
+      slug: "perfumes"
     },
     {
       icon: "https://images.pexels.com/photos/6978022/pexels-photo-6978022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       title: "Masks & Creams",
       alt: "Face cream jar",
-      bgColor: "#FED0BB"
+      bgColor: "#FED0BB",
+      slug: "masks-and-creams"
     },
     {
       icon: "https://images.pexels.com/photos/12606876/pexels-photo-12606876.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       title: "Lipstick",
       alt: "Lipstick",
-      bgColor: "#FCB9B2"
+      bgColor: "#FCB9B2",
+      slug: "lipstick"
     },
     {
       icon: "https://images.pexels.com/photos/17456617/pexels-photo-17456617/free-photo-of-box-of-ointment-and-shadow-of-hands.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       title: "Face Creams",
       alt: "Face cream product",
-      bgColor: "#FED0BB"
+      bgColor: "#FED0BB",
+      slug: "face-creams"
     }
   ];
 
@@ -53,9 +60,10 @@ export default function CategorySection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
           {features.map((feature, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center group"
+            <Link 
+              to={`/category/${feature.slug}`} 
+              key={index} 
+              className="flex flex-col items-center group cursor-pointer"
             >
               <div
                 className="rounded-full p-3 mb-5 w-40 h-40 flex items-center justify-center shadow-lg transition-all duration-300 hover:shadow-xl"
@@ -78,7 +86,7 @@ export default function CategorySection() {
               >
                 <p className="text-white font-medium">{feature.title}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

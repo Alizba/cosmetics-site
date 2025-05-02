@@ -10,6 +10,8 @@ import Cart from './Components/Cart'
 import Wishlist from './Components/WishList'
 import Products from './Components/Products'
 import Contacts from './Components/Contacts'
+import CategoryPage from './Components/landingPage/CategoryPage'
+import ProductImage from './Components/landingPage/ProductImage'
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/category/:categorySlug" element={<CategoryPage />} />
+        <Route path="/product/:categorySlug/:productId" element={<ProductImage/>}/>
         <Route path="/user/*" element={<UserPage />} />
         <Route path="/admin/*" element={<AdminPage />} />
       </Routes>
