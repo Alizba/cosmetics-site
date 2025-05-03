@@ -5,6 +5,7 @@ import CategorySection from './CategorySection'
 import PromotionalBanner from './PromotionalBanner'
 import FeaturedProducts from './FeaturedProducts'
 import AboutUs from './AboutUs'
+import ContactPage from './ContactPage'
 import Footer from './Footer'
 
 function Landing() {
@@ -16,6 +17,7 @@ function Landing() {
       <PromotionalBanner/>
       <AboutUs/>
       <FeaturedProducts/>
+      <ContactPage/>
       <Footer/>
           </div>
   )

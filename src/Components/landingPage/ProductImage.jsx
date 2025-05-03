@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
 
@@ -15,7 +15,9 @@ import cream1 from '../../assets/images/cream1.png';
 import faceCream from '../../assets/images/faceCream1.png';
 
 export default function ProductImage() {
-  const { productId } = useParams();
+  // Extract both parameters from the URL
+  const { categorySlug, productId } = useParams();
+  const location = useLocation();
   const [quantity, setQuantity] = useState(1);
   
   // Product database with detailed information
@@ -150,17 +152,45 @@ export default function ProductImage() {
     }
   ];
   
-  // Find the current product based on the productId parameter
-  const product = productsDatabase.find(p => p.id === parseInt(productId)) || {
-    id: 0,
-    name: 'Product Not Found',
-    price: 0,
-    image: null,
-    description: 'The product you are looking for does not exist.',
-    details: [],
-    stock: 0,
-    rating: 0
-  };
+  // Try to get product from location state first (from CategoryPage)
+  // Fall back to the productsDatabase if no state is available
+  let product;
+  
+  if (location.state && location.state.product) {
+    // Use the product from location state
+    const stateProduct = location.state.product;
+    
+    // Create a complete product object by extending the state product data
+    // with default values for missing properties
+    product = {
+      id: stateProduct.id,
+      name: stateProduct.name,
+      price: parseFloat(stateProduct.price.replace('$', '')),
+      image: stateProduct.image,
+      category: categorySlug,
+      description: stateProduct.description || 'Product description not available.',
+      details: [
+        'High quality product',
+        'Premium ingredients',
+        'Suitable for regular use',
+        'Cruelty-free'
+      ],
+      stock: 10,
+      rating: 4.5
+    };
+  } else {
+    // Fall back to searching the database by ID
+    product = productsDatabase.find(p => p.id === parseInt(productId)) || {
+      id: 0,
+      name: 'Product Not Found',
+      price: 0,
+      image: null,
+      description: 'The product you are looking for does not exist.',
+      details: [],
+      stock: 0,
+      rating: 0
+    };
+  }
 
   // Related products (here we're just getting 4 random products that aren't the current one)
   const relatedProducts = productsDatabase
@@ -214,8 +244,8 @@ export default function ProductImage() {
                 <span className="mx-2 text-gray-500">/</span>
               </li>
               <li className="flex items-center">
-                <Link to={`/category/${product.category}`} className="text-gray-500 hover:text-gray-700">
-                  {product.category?.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                <Link to={`/category/${categorySlug}`} className="text-gray-500 hover:text-gray-700">
+                  {categorySlug?.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
                 </Link>
                 <span className="mx-2 text-gray-500">/</span>
               </li>
@@ -250,7 +280,9 @@ export default function ProductImage() {
               </div>
               
               <div className="mb-6">
-                <span className="text-2xl font-bold" style={{ color: '#B23A48' }}>Rs {product.price.toFixed(1)}</span>
+                <span className="text-2xl font-bold" style={{ color: '#B23A48' }}>
+                  {typeof product.price === 'string' ? product.price : `Rs ${product.price.toFixed(1)}`}
+                </span>
               </div>
               
               <p className="text-gray-700 mb-6">{product.description}</p>
@@ -325,9 +357,16 @@ export default function ProductImage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {relatedProducts.map(relatedProduct => (
               <Link 
-                to={`/product/${relatedProduct.id}`} 
+                to={`/product/${relatedProduct.category}/${relatedProduct.id}`} 
                 key={relatedProduct.id}
                 className="group"
+                state={{ product: {
+                  id: relatedProduct.id,
+                  name: relatedProduct.name,
+                  price: `Rs ${relatedProduct.price.toFixed(1)}`,
+                  image: relatedProduct.image,
+                  description: relatedProduct.description
+                } }}
               >
                 <div className="bg-gray-100 rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                   <div className="h-48 overflow-hidden bg-white p-4">

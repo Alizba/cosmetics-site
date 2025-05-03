@@ -21,8 +21,8 @@ function Navbar() {
 
           <div className="hidden md:flex space-x-8">
             <Link to="/" className="font-medium transition duration-200 hover:text-white" style={{ color: '#461220' }}>Home</Link>
-            <Link to="/products" className="font-medium transition duration-200 hover:text-white" style={{ color: '#461220' }}>Products</Link>
-            <Link to="/contacts" className="font-medium transition duration-200 hover:text-white" style={{ color: '#461220' }}>Contacts</Link>
+            <Link to={"/FeaturedProducts"} className="font-medium transition duration-200 hover:text-white" style={{ color: '#461220' }}>Products</Link>
+            <Link to="/ContactPage" className="font-medium transition duration-200 hover:text-white" style={{ color: '#461220' }}>Contacts</Link>
           </div>
         </div>
 

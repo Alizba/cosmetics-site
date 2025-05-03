@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
+import image from '../../assets/images/serum2.png'
 
 const categoryData = {
   'hair-serums': {
@@ -42,7 +43,7 @@ const categoryData = {
     products: [
       { id: 1, name: 'Hydrating Sheet Mask', price: '$5.99', image: 'https://images.pexels.com/photos/6621462/pexels-photo-6621462.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' },
       { id: 2, name: 'Clay Purifying Mask', price: '$12.99', image: 'https://images.pexels.com/photos/3735149/pexels-photo-3735149.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' },
-      { id: 3, name: 'Overnight Treatment Cream', price: '$24.99', image: 'https://images.pexels.com/photos/3786694/pexels-photo-3786694.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' },
+      { id: 3, name: 'Overnight Treatment Cream', price: '$24.99', image: {image} },
     ]
   },
   'lipstick': {

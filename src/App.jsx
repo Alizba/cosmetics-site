@@ -8,8 +8,6 @@ import UserPage from './Components/userPage/UserLanding'
 import AdminPage from './Components/adminPage/AdminDashboard'
 import Cart from './Components/Cart'
 import Wishlist from './Components/WishList'
-import Products from './Components/Products'
-import Contacts from './Components/Contacts'
 import CategoryPage from './Components/landingPage/CategoryPage'
 import ProductImage from './Components/landingPage/ProductImage'
 
@@ -20,8 +18,6 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/contacts" element={<Contacts />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/category/:categorySlug" element={<CategoryPage />} />
