@@ -1,9 +1,10 @@
+
 import { useState } from 'react';
 import image from '../assets/images/signlady.webp'
 import { Mail, Lock, ChevronRight, Sparkles, Heart } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion'; // Import framer-motion
 
-// Changed function name to match the export in App.jsx
 function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,33 +16,68 @@ function SignIn() {
     // Add authentication logic here
   };
 
-  return (
-    <div className="flex h-screen w-full">
-      <div className="hidden md:flex md:w-2/5 relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src={image} 
-            alt="Beauty Products" 
-            className="object-cover w-full h-full"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-br from-[#B23A48] via-[#FCB9B2] to-[#461220] opacity-50 z-10"></div>
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-white p-10 z-20">
-          <div className="text-3xl font-bold mb-4">BEAUTY AWAITS</div>
-          <div className="text-xl mb-6">SIGN IN TO YOUR ACCOUNT</div>
-          <div className="w-16 h-16 flex items-center justify-center">
-            <Sparkles className="text-[#FED0BB]" size={36} />
-          </div>
-          <div className="mt-8 text-center text-[#FED0BB] max-w-xs">
-            Discover our exclusive collection of premium cosmetics and skincare products.
-          </div>
-        </div>
-      </div>
+  // Animation variants
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+      x: -100
+    },
+    in: {
+      opacity: 1,
+      x: 0
+    },
+    out: {
+      opacity: 0,
+      x: 100
+    }
+  };
 
+  const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: 0.5
+  };
+
+  // Form field animation variants
+  const formVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
+  return (
+    <motion.div 
+      className="flex h-screen w-full"
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransition}
+    >
       <div className="w-full md:w-3/5 flex flex-col justify-center items-center p-6 bg-white">
         <div className="w-full max-w-md">
           {/* Logo */}
-          <div className="flex flex-col items-center mb-10">
+          <motion.div 
+            className="flex flex-col items-center mb-10"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
             <div className="mb-2 relative">
               <div className="absolute -top-2 -right-2">
                 <Heart className="text-[#B23A48]" size={16} fill="#B23A48" />
@@ -56,10 +92,15 @@ function SignIn() {
             </div>
             <h1 className="text-3xl font-bold text-[#461220]">GLAM LOGIN</h1>
             <p className="text-sm text-[#B23A48] mt-1">Your beauty journey starts here</p>
-          </div>
+          </motion.div>
 
-          <div className="space-y-6">
-            <div className="relative">
+          <motion.div 
+            className="space-y-6"
+            variants={formVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.div className="relative" variants={itemVariants}>
               <Mail className="absolute left-2 top-3 text-[#B23A48]" size={20} />
               <input
                 type="email"
@@ -68,9 +109,9 @@ function SignIn() {
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full py-3 pl-10 pr-4 border-b border-[#FCB9B2] focus:border-[#B23A48] focus:outline-none bg-transparent text-[#461220]"
               />
-            </div>
+            </motion.div>
 
-            <div className="relative">
+            <motion.div className="relative" variants={itemVariants}>
               <Lock className="absolute left-2 top-3 text-[#B23A48]" size={20} />
               <input
                 type="password"
@@ -79,25 +120,36 @@ function SignIn() {
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full py-3 pl-10 pr-4 border-b border-[#FCB9B2] focus:border-[#B23A48] focus:outline-none bg-transparent text-[#461220]"
               />
-            </div>
+            </motion.div>
 
-            <div className="flex justify-between items-center">
+            <motion.div className="flex justify-between items-center" variants={itemVariants}>
               <a href="#" className="text-sm text-[#B23A48] hover:text-[#8C2F39]">
                 Forgot Password?
               </a>
-              <button
+              <motion.button
                 onClick={handleSubmit}
                 className="px-8 py-3 bg-[#B23A48] text-white rounded-full hover:bg-[#8C2F39] transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 LOGIN
-              </button>
-            </div>
-          </div>
+              </motion.button>
+            </motion.div>
+          </motion.div>
 
-          <div className="mt-8">
+          <motion.div 
+            className="mt-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
             <div className="text-center mb-4 text-[#461220]">Or Login with</div>
             <div className="flex justify-center space-x-4">
-              <button className="flex items-center space-x-2 px-4 py-2 border border-[#FED0BB] rounded-md hover:bg-[#FED0BB] hover:bg-opacity-10">
+              <motion.button 
+                className="flex items-center space-x-2 px-4 py-2 border border-[#FED0BB] rounded-md hover:bg-[#FED0BB] hover:bg-opacity-10"
+                whileHover={{ scale: 1.05, backgroundColor: "rgba(254, 208, 187, 0.1)" }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
                     fill="#4285F4"
@@ -105,8 +157,12 @@ function SignIn() {
                   />
                 </svg>
                 <span className="text-[#461220]">Google</span>
-              </button>
-              <button className="flex items-center space-x-2 px-4 py-2 border border-[#FED0BB] rounded-md hover:bg-[#FED0BB] hover:bg-opacity-10">
+              </motion.button>
+              <motion.button 
+                className="flex items-center space-x-2 px-4 py-2 border border-[#FED0BB] rounded-md hover:bg-[#FED0BB] hover:bg-opacity-10"
+                whileHover={{ scale: 1.05, backgroundColor: "rgba(254, 208, 187, 0.1)" }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
                     fill="#1877F2"
@@ -114,21 +170,51 @@ function SignIn() {
                   />
                 </svg>
                 <span className="text-[#461220]">Facebook</span>
-              </button>
+              </motion.button>
             </div>
-          </div>
+          </motion.div>
           
-          <div className="mt-8 text-center">
+          <motion.div 
+            className="mt-8 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+          >
             <p className="text-[#461220]">
               Don't have an account?{" "}
               <Link to="/signup" className="text-[#B23A48] hover:text-[#8C2F39] font-semibold">
                 Sign up
               </Link>
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </div>
+      <div className="hidden md:flex md:w-2/5 relative overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src={image} 
+            alt="Beauty Products" 
+            className="object-cover w-full h-full"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#B23A48] via-[#FCB9B2] to-[#461220] opacity-50 z-10"></div>
+        <motion.div 
+          className="absolute inset-0 flex flex-col justify-center items-center text-white p-10 z-20"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.7 }}
+        >
+          <div className="text-3xl font-bold mb-4">BEAUTY AWAITS</div>
+          <div className="text-xl mb-6">SIGN IN TO YOUR ACCOUNT</div>
+          <div className="w-16 h-16 flex items-center justify-center">
+            <Sparkles className="text-[#FED0BB]" size={36} />
+          </div>
+          <div className="mt-8 text-center text-[#FED0BB] max-w-xs">
+            Discover our exclusive collection of premium cosmetics and skincare products.
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
   );
 }
 

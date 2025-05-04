@@ -25,10 +25,10 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="font-sans" style={{ background: 'linear-gradient(to bottom right, #FED0BB, #FCB9B2)' }}>
       {/* Header */}
-      <header className="bg-[#B23A48] text-white p-6">
-        <h1 className="text-3xl font-bold text-center">Contact Us</h1>
+      <header className="text-white p-6">
+      <h2 className="text-center text-4xl font-serif font-bold" style={{ color: '#461220' }}>Contact Us</h2>
       </header>
 
       <div className="container mx-auto px-4 py-16 flex flex-col lg:flex-row gap-12">
@@ -143,11 +143,11 @@ export default function ContactPage() {
               </div>
             </div>
             
-            <div className="mt-8">
+            {/* <div className="mt-8">
               <button className="w-full bg-white text-[#461220] border border-[#461220] hover:bg-gray-100 py-3 px-6 rounded-md transition duration-300 flex items-center justify-center font-medium">
                 View Map
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

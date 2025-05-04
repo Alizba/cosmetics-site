@@ -12,14 +12,22 @@ function Landing() {
   return (
     <div className="w-screen max-w-full">
       <Navbar />
-      <HeroSection/>
-      <CategorySection />
-      <PromotionalBanner/>
-      <AboutUs/>
-      <FeaturedProducts/>
-      <ContactPage/>
-      <Footer/>
-          </div>
+      <div className="min-h-screen">
+        <div id="home">
+          <HeroSection />
+        </div>
+        <CategorySection />
+        <PromotionalBanner />
+        <AboutUs />
+        <div id="products">
+          <FeaturedProducts />
+        </div>
+        <div id="contact">
+          <ContactPage />
+        </div>
+        <Footer />
+      </div>
+    </div>
   )
 }
 

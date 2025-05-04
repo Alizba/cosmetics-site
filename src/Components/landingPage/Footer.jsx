@@ -3,7 +3,7 @@ import { Facebook, Instagram, Twitter, Mail, MapPin, Phone } from 'lucide-react'
 
 export default function Footer() {
     return (
-        <footer className="w-full pt-16 pb-8 relative overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #FED0BB, #FCB9B2)' }}>
+        <footer className="w-full pt-16 pb-8 relative overflow-hidden bg-gray-100">
             <div className="absolute right-10 top-10">
                 <div className="w-24 h-24 rounded-full flex items-center justify-center" style={{ backgroundColor: '#FCB9B2' }}>
                     <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ backgroundColor: '#F5F5F5' }}>

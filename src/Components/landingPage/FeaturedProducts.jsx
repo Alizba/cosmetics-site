@@ -20,56 +20,64 @@ export default function FeaturedProducts() {
             name: 'Hair Oil',
             price: 299,
             image: serum1,
-            category: 'hair-serums'
+            category: 'hair-serums',
+            description: 'Product description goes here. This is a short description of the product.'
         },
         {
             id: 2,
             name: 'Compact Powder',
             price: 339,
             image: makeUp1,
-            category: 'makeup-brushes'
+            category: 'makeup-brushes',
+            description: 'Product description goes here. This is a short description of the product.'
         },
         {
             id: 3,
             name: 'Eye Shades',
             price: 399,
             image: makeUp2,
-            category: 'makeup-brushes'
+            category: 'makeup-brushes',
+            description: 'Product description goes here. This is a short description of the product.'
         },
         {
             id: 4,
             name: 'Loose cosmetic Powder',
             price: 399,
             image: makeUp3,
-            category: 'makeup-brushes'
+            category: 'makeup-brushes',
+            description: 'Product description goes here. This is a short description of the product.'
         },
         {
             id: 5,
             name: 'Lip Sticks',
             price: 229,
             image: makeUp4,
-            category: 'lipstick'
+            category: 'lipstick',
+            description: 'Product description goes here. This is a short description of the product.'
         },
         {
             id: 6,
             name: 'Whitening Cream',
             price: 229,
             image: cream1,
-            category: 'masks-and-creams'
+            category: 'masks-and-creams',
+            description: 'Product description goes here. This is a short description of the product.'
         },
         {
             id: 7,
             name: 'Hand Cream',
             price: 289,
             image: faceCream,
-            category: 'face-creams'
+            category: 'face-creams',
+            description: 'Product description goes here. This is a short description of the product.'
         },
         {
             id: 8,
             name: 'Acne Serum',
             price: 299,
             image: serum2,
-            category: 'hair-serums'
+            category: 'hair-serums',
+            description: 'Product description goes here. This is a short description of the product.'
         }
     ];
 
@@ -109,33 +117,40 @@ export default function FeaturedProducts() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                     {products.map((product) => (
                         <Link 
                             to={`/product/${product.category}/${product.id}`} 
                             key={product.id} 
                             className="group"
                         >
-                            {/* Card with gray background as requested */}
-                            <div className="bg-gray-100 rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                                <div className="h-64 overflow-hidden" style={{ backgroundColor: '#F3F4F6' }}>
-                                    <img
-                                        src={product.image}
-                                        alt={product.name}
-                                        className="w-full h-full object-contain p-4 transition-transform group-hover:scale-105"
-                                    />
+                            <div className="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg">
+                                {/* Product image with background */}
+                                <div className="h-48 flex justify-center items-center" style={{ backgroundColor: '#F5f5f5' }}>
+                                    <div className="text-center">
+                                        <img
+                                            src={product.image}
+                                            alt={product.name}
+                                            className="h-40 object-contain mx-auto"
+                                        />
+                                    </div>
                                 </div>
-                                <div className="p-5 text-center">
-                                    <h3 className="text-xl font-medium mb-2" style={{ color: '#8C2F39' }}>{product.name}</h3>
-                                    <div className="flex justify-center mt-3">
-                                        <div 
-                                            className="px-5 py-2 rounded-full inline-block" 
+                                
+                                {/* Product details */}
+                                <div className="p-5">
+                                    <h3 className="text-lg font-bold mb-2" style={{ color: '#461220' }}>{product.name}</h3>
+                                    <p className="text-sm text-gray-600 mb-4">{product.description}</p>
+                                    
+                                    <div className="flex justify-between items-center">
+                                        <div className="font-medium" style={{ color: '#B23A48' }}>
+                                            Rs {product.price.toFixed(1)}
+                                        </div>
+                                        <button 
+                                            className="px-4 py-2 text-sm text-white rounded" 
                                             style={{ backgroundColor: '#B23A48' }}
                                         >
-                                            <p className="text-white font-medium">
-                                                Rs {product.price.toFixed(1)}
-                                            </p>
-                                        </div>
+                                            View Details
+                                        </button>
                                     </div>
                                 </div>
                             </div>

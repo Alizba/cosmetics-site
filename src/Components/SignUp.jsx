@@ -1,9 +1,10 @@
+
 import { useState } from 'react';
 import { Mail, Lock, User, Calendar, ChevronRight, Sparkles, Heart, Gift } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion'; // Import framer-motion
 import image from '../assets/images/signlady.webp'
 
-// Changed function name to match the export in App.jsx
 function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,8 +21,59 @@ function SignUp() {
     // Add registration logic here
   };
 
+  // Animation variants
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+      x: 100
+    },
+    in: {
+      opacity: 1,
+      x: 0
+    },
+    out: {
+      opacity: 0,
+      x: -100
+    }
+  };
+
+  const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: 0.5
+  };
+
+  // Form field animation variants
+  const formVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   return (
-    <div className="flex h-screen w-full">
+    <motion.div 
+      className="flex h-screen w-full"
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransition}
+    >
       <div className="hidden md:flex md:w-2/5 relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
@@ -32,7 +84,12 @@ function SignUp() {
         </div>
         <div className="absolute inset-0 bg-gradient-to-br from-[#B23A48] via-[#FCB9B2] to-[#461220] opacity-50 z-10"></div>
         
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-white p-10 z-20">
+        <motion.div 
+          className="absolute inset-0 flex flex-col justify-center items-center text-white p-10 z-20"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.7 }}
+        >
           <div className="text-3xl font-bold mb-4">JOIN OUR BEAUTY CLUB</div>
           <div className="text-xl mb-6">CREATE YOUR ACCOUNT</div>
           <div className="w-16 h-16 flex items-center justify-center">
@@ -45,13 +102,18 @@ function SignUp() {
             <Sparkles className="text-[#FED0BB] mr-2" size={16} />
             <span className="text-[#FED0BB]">Get 15% off your first order</span>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       <div className="w-full md:w-3/5 flex flex-col justify-center items-center p-6 bg-white overflow-y-auto">
         <div className="w-full max-w-md">
      
-          <div className="flex flex-col items-center mb-8">
+          <motion.div 
+            className="flex flex-col items-center mb-8"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
             <div className="mb-2 relative">
               <div className="absolute -top-2 -right-2">
                 <Heart className="text-[#B23A48]" size={16} fill="#B23A48" />
@@ -66,10 +128,15 @@ function SignUp() {
             </div>
             <h1 className="text-3xl font-bold text-[#461220]">CREATE ACCOUNT</h1>
             <p className="text-sm text-[#B23A48] mt-1">Your personalized beauty experience awaits</p>
-          </div>
+          </motion.div>
 
-          <div className="space-y-4">
-            <div className="relative">
+          <motion.div 
+            className="space-y-4"
+            variants={formVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.div className="relative" variants={itemVariants}>
               <User className="absolute left-2 top-3 text-[#B23A48]" size={20} />
               <input
                 type="text"
@@ -78,9 +145,9 @@ function SignUp() {
                 onChange={(e) => setFullName(e.target.value)}
                 className="w-full py-3 pl-10 pr-4 border-b border-[#FCB9B2] focus:border-[#B23A48] focus:outline-none bg-transparent text-[#461220]"
               />
-            </div>
+            </motion.div>
 
-            <div className="relative">
+            <motion.div className="relative" variants={itemVariants}>
               <Mail className="absolute left-2 top-3 text-[#B23A48]" size={20} />
               <input
                 type="email"
@@ -89,9 +156,9 @@ function SignUp() {
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full py-3 pl-10 pr-4 border-b border-[#FCB9B2] focus:border-[#B23A48] focus:outline-none bg-transparent text-[#461220]"
               />
-            </div>
+            </motion.div>
 
-            <div className="relative">
+            <motion.div className="relative" variants={itemVariants}>
               <Calendar className="absolute left-2 top-3 text-[#B23A48]" size={20} />
               <input
                 type="date"
@@ -101,9 +168,9 @@ function SignUp() {
                 className="w-full py-3 pl-10 pr-4 border-b border-[#FCB9B2] focus:border-[#B23A48] focus:outline-none bg-transparent text-[#461220]"
               />
               <p className="text-xs text-[#B23A48] mt-1">For birthday rewards and age-appropriate recommendations</p>
-            </div>
+            </motion.div>
 
-            <div className="relative">
+            <motion.div className="relative" variants={itemVariants}>
               <Lock className="absolute left-2 top-3 text-[#B23A48]" size={20} />
               <input
                 type="password"
@@ -112,9 +179,9 @@ function SignUp() {
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full py-3 pl-10 pr-4 border-b border-[#FCB9B2] focus:border-[#B23A48] focus:outline-none bg-transparent text-[#461220]"
               />
-            </div>
+            </motion.div>
 
-            <div className="relative">
+            <motion.div className="relative" variants={itemVariants}>
               <Lock className="absolute left-2 top-3 text-[#B23A48]" size={20} />
               <input
                 type="password"
@@ -123,9 +190,9 @@ function SignUp() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 className="w-full py-3 pl-10 pr-4 border-b border-[#FCB9B2] focus:border-[#B23A48] focus:outline-none bg-transparent text-[#461220]"
               />
-            </div>
+            </motion.div>
 
-            <div className="flex items-start mt-6">
+            <motion.div className="flex items-start mt-6" variants={itemVariants}>
               <div className="flex items-center h-5">
                 <input
                   id="terms"
@@ -140,9 +207,9 @@ function SignUp() {
                   I agree to the <a href="#" className="text-[#B23A48] hover:text-[#8C2F39]">Terms of Service</a> and <a href="#" className="text-[#B23A48] hover:text-[#8C2F39]">Privacy Policy</a>
                 </label>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="flex items-start">
+            <motion.div className="flex items-start" variants={itemVariants}>
               <div className="flex items-center h-5">
                 <input
                   id="newsletter"
@@ -157,22 +224,33 @@ function SignUp() {
                   Subscribe to our newsletter for exclusive offers and beauty tips
                 </label>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="mt-6">
-              <button
+            <motion.div className="mt-6" variants={itemVariants}>
+              <motion.button
                 onClick={handleSubmit}
                 className="w-full py-3 bg-[#B23A48] text-white rounded-full hover:bg-[#8C2F39] transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 CREATE ACCOUNT
-              </button>
-            </div>
-          </div>
+              </motion.button>
+            </motion.div>
+          </motion.div>
 
-          <div className="mt-8">
+          <motion.div 
+            className="mt-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7, duration: 0.5 }}
+          >
             <div className="text-center mb-4 text-[#461220]">Or Sign Up with</div>
             <div className="flex justify-center space-x-4">
-              <button className="flex items-center space-x-2 px-4 py-2 border border-[#FED0BB] rounded-md hover:bg-[#FED0BB] hover:bg-opacity-10 w-1/2 justify-center">
+              <motion.button 
+                className="flex items-center space-x-2 px-4 py-2 border border-[#FED0BB] rounded-md hover:bg-[#FED0BB] hover:bg-opacity-10 w-1/2 justify-center"
+                whileHover={{ scale: 1.05, backgroundColor: "rgba(254, 208, 187, 0.1)" }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
                     fill="#4285F4"
@@ -180,8 +258,12 @@ function SignUp() {
                   />
                 </svg>
                 <span className="text-[#461220]">Google</span>
-              </button>
-              <button className="flex items-center space-x-2 px-4 py-2 border border-[#FED0BB] rounded-md hover:bg-[#FED0BB] hover:bg-opacity-10 w-1/2 justify-center">
+              </motion.button>
+              <motion.button 
+                className="flex items-center space-x-2 px-4 py-2 border border-[#FED0BB] rounded-md hover:bg-[#FED0BB] hover:bg-opacity-10 w-1/2 justify-center"
+                whileHover={{ scale: 1.05, backgroundColor: "rgba(254, 208, 187, 0.1)" }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
                     fill="#1877F2"
@@ -189,20 +271,26 @@ function SignUp() {
                   />
                 </svg>
                 <span className="text-[#461220]">Facebook</span>
-              </button>
+              </motion.button>
             </div>
-          </div>
-          <div className="mt-8 text-center pb-8">
+          </motion.div>
+
+          <motion.div 
+            className="mt-8 text-center pb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+          >
             <p className="text-[#461220]">
               Already have an account?{" "}
               <Link to="/signin" className="text-[#B23A48] hover:text-[#8C2F39] font-semibold">
                 Login
               </Link>
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
