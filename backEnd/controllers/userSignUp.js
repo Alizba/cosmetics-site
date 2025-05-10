@@ -29,6 +29,7 @@ async function userSignUpController(req, res) {
         
         const payload = {
             ...req.body,
+            role : "General",
             password: hashPassword
         };
         
