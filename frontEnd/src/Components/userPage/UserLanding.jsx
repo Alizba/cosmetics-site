@@ -1,8 +1,11 @@
 import React from 'react'
+import UserNav from './UserNav'
 
 function UserLanding() {
   return (
-    <div>UserLanding</div>
+    <>
+    <UserNav/>
+    </>
   )
 }
 

@@ -10,7 +10,9 @@ import Cart from './Components/Cart'
 import Wishlist from './Components/WishList'
 import CategoryPage from './Components/landingPage/CategoryPage'
 import ProductImage from './Components/landingPage/ProductImage'
+import UserLanding from './Components/userPage/UserLanding'
 import { AnimatePresence } from 'framer-motion'
+
 
 function App() {
   const location = useLocation();
@@ -28,6 +30,8 @@ function App() {
           <Route path="/product/:categorySlug/:productId" element={<ProductImage/>}/>
           <Route path="/user/*" element={<UserPage />} />
           <Route path="/admin/*" element={<AdminPage />} />
+          <Route path="/component/userpage/userlanding" element={<UserLanding />} />
+
         </Routes>
       </AnimatePresence>
     </div>

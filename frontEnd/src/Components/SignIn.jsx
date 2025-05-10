@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import image from '../assets/images/signlady.webp'
-import { Mail, Lock, ChevronRight, Sparkles, Heart } from 'lucide-react';
+import { Mail, Lock, Sparkles, Heart } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+
 
 function SignIn() {
   const [email, setEmail] = useState('');
@@ -11,25 +12,7 @@ function SignIn() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
-  const validateForm = () => {
-    const newErrors = {};
-
-    // Email validation
-    if (!email) {
-      newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = "Email address is invalid";
-    }
-
-    // Password validation
-    if (!password) {
-      newErrors.password = "Password is required";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
+  
 
   // Login Form Submit Handler
   const handleLoginSubmit = (e) => {
@@ -40,7 +23,7 @@ function SignIn() {
       console.log('Login attempt with:', { email, password });
 
       // Make API call to your backend
-      fetch('http://localhost:5000/api/auth/login', {
+      fetch('http://localhost:5000/api/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,19 +38,19 @@ function SignIn() {
           return response.json();
         })
         .then(data => {
+          console.log('Login response:', data);
           setIsSubmitting(false);
-          localStorage.setItem('token', data.token);
-          
-          // Check if user is admin and redirect accordingly
-          if (data.user && data.user.role === 'admin') {
-            navigate('../adminPage/AdminDashboard');
-          } else {
-            navigate('/userPage/UserLanding');
+
+          // Store the token in localStorage
+          if (data.token) {
+            localStorage.setItem('token', data.token);
           }
+           navigate('/component/userPage/Userlanding');
+          
         })
         .catch(error => {
           setIsSubmitting(false);
-          setErrors({ general: 'Invalid email or password. Please try again.' });
+          setErrors({ general: error.message || 'Invalid email or password. Please try again.' });
           console.error('Login error:', error);
         });
     } else {
@@ -175,6 +158,16 @@ function SignIn() {
               initial="hidden"
               animate="visible"
             >
+              {errors.general && (
+                <motion.div
+                  className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                  role="alert"
+                  variants={itemVariants}
+                >
+                  <span className="block sm:inline">{errors.general}</span>
+                </motion.div>
+              )}
+
               <motion.div className="relative" variants={itemVariants}>
                 <label htmlFor="email" className="sr-only">Email</label>
                 <Mail className="absolute left-2 top-3 text-[#B23A48]" size={20} aria-hidden="true" />
