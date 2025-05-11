@@ -1,9 +1,8 @@
-import { Heart, Search, ShoppingBag, UserPlus, User } from 'lucide-react';
+import { User, ShoppingCart, LogOut } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-function Navbar() {
-  const [searchQuery, setSearchQuery] = useState('');
+function SimplifiedUserNav() {
   const [scrolled, setScrolled] = useState(false);
 
   // Add scroll event listener to change navbar appearance on scroll
@@ -21,116 +20,55 @@ function Navbar() {
     };
   }, [scrolled]);
 
-  // Function to handle smooth scrolling to section
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      // Calculate offset to account for sticky navbar height
-      const navbarHeight = 72; // Approximate height of  navbar in pixels
-      const sectionPosition = section.getBoundingClientRect().top;
-      const offsetPosition = sectionPosition + window.pageYOffset - navbarHeight;
-      
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   return (
     <div className="w-screen max-w-full">
       <nav 
-        className={`flex items-center justify-around px-6 py-4 sticky top-0 z-50 w-full left-0 right-0 shadow-md transition-all duration-300 ${
+        className={`flex items-center justify-around px-6 sticky top-0 z-50 w-full left-0 right-0 shadow-md transition-all duration-300 ${
           scrolled ? 'py-2' : 'py-4'
         }`} 
         style={{ backgroundColor: scrolled ? 'rgba(245, 245, 245, 0.95)' : '#F5F5F5' }}
       >
-
+        {/* Logo */}
         <div className="flex items-center">
-
-          <div className="mr-6">
-            <Link to="/">
-              <h1 className="text-4xl font-extrabold tracking-widest italic" style={{ color: '#461220' }}>Wera</h1>
-            </Link>
-          </div>
-
-          <div className="h-8 w-px mx-4 hidden md:block" style={{ backgroundColor: '#8C2F39' }}></div>
-
-          <div className="hidden md:flex space-x-8">
-            <a 
-              href="#home" 
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection('home');
-              }}
-              className="font-medium transition duration-200 hover:text-white" 
-              style={{ color: '#461220' }}
-            >
-              Home
-            </a>
-            <a 
-              href="#products" 
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection('products');
-              }}
-              className="font-medium transition duration-200 hover:text-white" 
-              style={{ color: '#461220' }}
-            >
-              Products
-            </a>
-            <a 
-              href="#contact" 
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection('contact');
-              }}
-              className="font-medium transition duration-200 hover:text-white" 
-              style={{ color: '#461220' }}
-            >
-              Contacts
-            </a>
-          </div>
+          <Link to="/">
+            <h1 className="text-4xl font-extrabold tracking-widest italic" style={{ color: '#461220' }}>Wera</h1>
+          </Link>
         </div>
 
-        <div className="flex items-center">
-
-          <div className="relative mr-4">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search size={18} style={{ color: '#8C2F39' }} />
-            </div>
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 pr-4 py-2 rounded-full text-sm shadow-md focus:outline-none focus:ring-2 w-64"
-              style={{
-                backgroundColor: '#FED0BB',
-                color: '#461220',
-                borderColor: '#B23A48',
-                '::placeholder': { color: '#8C2F39' }
-              }}
-            />
-          </div>
-
-          <Link to="/signin">
-            <button className="p-3 m-1 rounded-full shadow-md transition duration-200 hover:shadow-lg" style={{ backgroundColor: '#B23A48' }}>
-              <User size={20} className="text-white" />
-              <span className="sr-only">Sign In</span>
+        {/* Icons */}
+        <div className="flex items-center space-x-3">
+          {/* Cart Icon */}
+          <Link to="/cart">
+            <button className="p-3 rounded-full shadow-md transition duration-200 hover:shadow-lg" style={{ backgroundColor: '#B23A48' }}>
+              <ShoppingCart size={20} className="text-white" />
+              <span className="sr-only">Shopping Cart</span>
             </button>
           </Link>
           
-          <Link to="/signup">
-            <button className="p-3 m-1 rounded-full shadow-md transition duration-200 hover:shadow-lg" style={{ backgroundColor: '#B23A48' }}>
-              <UserPlus size={20} className="text-white" />
-              <span className="sr-only">Sign Up</span>
+          {/* Profile Icon */}
+          <Link to="/profile">
+            <button className="p-3 rounded-full shadow-md transition duration-200 hover:shadow-lg" style={{ backgroundColor: '#B23A48' }}>
+              <User size={20} className="text-white" />
+              <span className="sr-only">Profile</span>
             </button>
           </Link>
+          
+          {/* Logout Button */}
+          <button 
+            className="p-3 rounded-full shadow-md transition duration-200 hover:shadow-lg" 
+            style={{ backgroundColor: '#B23A48' }}
+            onClick={() => {
+              // Add your logout logic here
+              console.log("Logout clicked");
+            }}
+          >
+            <LogOut size={20} className="text-white" />
+            <span className="sr-only">Logout</span>
+          </button>
         </div>
       </nav>
     </div>
   );
 }
 
-export default Navbar;
+export default SimplifiedUserNav;
