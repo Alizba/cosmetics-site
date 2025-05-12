@@ -14,7 +14,6 @@ function SignIn() {
 
   
 
-  // Login Form Submit Handler
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -22,7 +21,6 @@ function SignIn() {
     if (validateLoginForm()) {
       console.log('Login attempt with:', { email, password });
 
-      // Make API call to your backend
       fetch('http://localhost:5000/api/signin', {
         method: 'POST',
         headers: {
@@ -41,7 +39,6 @@ function SignIn() {
           console.log('Login response:', data);
           setIsSubmitting(false);
 
-          // Store the token in localStorage
           if (data.token) {
             localStorage.setItem('token', data.token);
           }
@@ -58,32 +55,26 @@ function SignIn() {
     }
   };
 
-  // Login Form Validation
   const validateLoginForm = () => {
     const newErrors = {};
 
-    // Validate email
     if (!email) {
       newErrors.email = 'Email is required';
     } else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       newErrors.email = 'Please enter a valid email address';
     }
 
-    // Validate password
     if (!password) {
       newErrors.password = 'Password is required';
     } else if (password.length < 8) {
       newErrors.password = 'Password must be at least 8 characters';
     }
 
-    // Update errors state
     setErrors(newErrors);
 
-    // Return true if no errors
     return Object.keys(newErrors).length === 0;
   };
 
-  // Animation variants
   const pageVariants = {
     initial: { opacity: 0, x: -100 },
     in: { opacity: 1, x: 0 },

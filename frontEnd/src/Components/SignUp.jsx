@@ -13,12 +13,10 @@ function SignUp() {
   const [successMessage, setSuccessMessage] = useState(''); // Added success message state
   const navigate = useNavigate();
 
-  // Form validation states
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
   const [passwordStrength, setPasswordStrength] = useState(0);
 
-  // Password validation criteria
   const [passwordCriteria, setPasswordCriteria] = useState({
     length: false,
     uppercase: false,
@@ -41,7 +39,6 @@ function SignUp() {
 
       setPasswordCriteria(criteria);
 
-      // Calculate strength (0-4)
       const strengthScore = Object.values(criteria).filter(Boolean).length;
       setPasswordStrength(strengthScore);
     } else {
